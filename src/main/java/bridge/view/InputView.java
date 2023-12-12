@@ -7,6 +7,7 @@ import camp.nextstep.edu.missionutils.Console;
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 public class InputView {
+    OutputView outputView = new OutputView();
 
     /**
      * 다리의 길이를 입력받는다.
@@ -32,13 +33,29 @@ public class InputView {
         }
     }
 
-
     /**
      * 사용자가 이동할 칸을 입력받는다.
      */
     public String readMoving() {
-        return null;
+        while(true) {
+            String moving;
+            try {
+                String userMovingInput = Console.readLine();
+                validateUserMovingInput(userMovingInput);
+                return userMovingInput;
+            }
+            catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
+            }
+        }
     }
+
+    private void validateUserMovingInput(String userMovingInput) {
+        if (!userMovingInput.equals("U") && !userMovingInput.equals("D")) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_MOVING_ERROR.getMessage());
+        }
+    }
+
 
     /**
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
