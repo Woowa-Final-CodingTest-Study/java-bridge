@@ -1,7 +1,10 @@
-package bridge.domain;
+package bridge;
 
+import bridge.domain.BridgeEnum;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -19,24 +22,13 @@ public class BridgeMaker {
      * @return 입력받은 길이에 해당하는 다리 모양. 위 칸이면 "U", 아래 칸이면 "D"로 표현해야 한다.
      */
     public List<String> makeBridge(int size) {
-        List<String> bridge = new ArrayList<>();
-
+        List<String> result = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
-            int randomNumber = bridgeNumberGenerator.generate();
-            String upOrDown = convertNumberToUpOrDown(randomNumber);
-            bridge.add(upOrDown);
+            int locationNumber = bridgeNumberGenerator.generate();
+            BridgeEnum bridgeEnum = BridgeEnum.createBridgeNumberType(locationNumber);
+            result.add(bridgeEnum.getStringType());
         }
-        return bridge;  // 수정된 부분
+        return result;
     }
 
-
-    private String convertNumberToUpOrDown(int randomNumber) {
-        if (randomNumber == 0) {
-            return "U";
-        }
-        if (randomNumber == 1) {
-            return "D";
-        }
-        return null;
-    }
 }

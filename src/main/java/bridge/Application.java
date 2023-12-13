@@ -1,11 +1,11 @@
 package bridge;
 
-import bridge.controller.Controller;
+import bridge.controller.BridgeController;
 
 public class Application {
 
     public static void main(String[] args) {
-        Controller controller = new Controller();
+        BridgeController controller = new BridgeController();
         controller.run();
     }
 }
